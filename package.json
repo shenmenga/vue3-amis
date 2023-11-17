@@ -1,0 +1,24 @@
+{
+    "name": "vue3-amis",
+    "private": true,
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "lint": "turbo run lint",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+        "eslint-fix": "eslint \"**/*.{vue,ts,tsx}\" --fix"
+    },
+    "devDependencies": {
+        "@q-front-npm-configs/eslint": "1.0.4",
+        "@q-front-npm-configs/tsconfig": "1.0.0",
+        "eslint": "8.48.0",
+        "eslint-config-prettier": "9.0.0",
+        "eslint-plugin-prettier": "4.2.1",
+        "prettier": "2.5.1",
+        "turbo": "latest"
+    },
+    "packageManager": "pnpm@8.9.0",
+    "dependencies": {
+        "@vueuse/core": "10.6.1"
+    }
+}

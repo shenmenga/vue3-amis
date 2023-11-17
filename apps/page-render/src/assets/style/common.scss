@@ -1,0 +1,26 @@
+.g-flex {
+    display: flex;
+}
+
+.g-flex-start-center {
+    display: flex;
+    align-items: center;
+}
+
+.g-flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-flex-1 {
+    flex: 1;
+}
+
+.g-w-600 {
+    width: 600px;
+}
+
+.g-w-full {
+    width: 100%;
+}
