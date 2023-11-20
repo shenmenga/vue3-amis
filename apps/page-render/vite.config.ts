@@ -5,6 +5,13 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "@/assets/style/variable.scss";`
+            }
+        }
+    },
     resolve: {
         alias: {
             '@': resolve(process.cwd(), '.', 'src')

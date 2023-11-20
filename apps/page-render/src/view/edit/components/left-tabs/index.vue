@@ -9,7 +9,7 @@
                 </a-tooltip>
             </template>
             <code-json v-if="item.value === 'code'"></code-json>
-            <template v-else> 111 </template>
+            <template v-else> 常用组件列表 </template>
         </a-tab-pane>
     </a-tabs>
 </template>
@@ -34,7 +34,6 @@ const activeKey = ref(tabList.value[0].value);
 </script>
 <style lang="scss" scoped>
 .left-tabs {
-    width: 300px;
     height: 100%;
     background-color: #fff;
 

@@ -6,8 +6,11 @@ import * as icons from '@ant-design/icons-vue';
 import type { Component } from 'vue';
 import formCreate from '@form-create/ant-design-vue';
 import install from '@form-create/ant-design-vue/auto-import';
+import { createPinia } from 'pinia';
+
 const app = createApp(App);
 app.use(router);
+app.use(createPinia());
 
 // 按需导入from-create
 formCreate.use(install);
