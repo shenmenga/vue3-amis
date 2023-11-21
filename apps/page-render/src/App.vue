@@ -5,6 +5,9 @@
 </template>
 <script setup lang="ts">
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import { useStoreAmis } from '@/store/modules/amis';
+const storeAmis = useStoreAmis();
+storeAmis.get_amis_sdk();
 </script>
 <style lang="scss">
 @import '@/assets/style/_reset.css';

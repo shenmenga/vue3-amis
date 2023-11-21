@@ -1,15 +1,15 @@
 <template>
     <div class="code-editor" :style="{ width: editorWidth + 'px' }">
-        <div id="codeEditor"></div>
+        <div id="js-code-editor"></div>
         <div class="code-editor-drag" @mousedown="on_mousedown"></div>
     </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStoreGlobal } from '@/store/modules/global';
-import { message } from 'ant-design-vue';
+import { useStoreAmis } from '@/store/modules/amis';
+const storeAmis = useStoreAmis();
 const storeGlobal = useStoreGlobal();
-const amis = (window as any).amisRequire('amis/embed');
 let amisInstance: any = {};
 
 const get_schema = () => {
@@ -66,7 +66,7 @@ const on_mouseup = () => {
 };
 
 onMounted(() => {
-    amisInstance = amis.embed('#codeEditor', get_schema());
+    amisInstance = storeAmis.amis.embed('#js-code-editor', get_schema());
 });
 </script>
 <style lang="scss" scoped>

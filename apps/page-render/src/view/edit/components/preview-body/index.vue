@@ -1,15 +1,15 @@
 <template>
-    <div class="preview-body g-flex-1" id="previewBody"></div>
+    <div class="preview-body g-flex-1" id="js-preview-body"></div>
 </template>
 <script lang="ts" setup>
 import { onMounted, onUnmounted } from 'vue';
 import { useStoreGlobal } from '@/store/modules/global';
-
+import { useStoreAmis } from '@/store/modules/amis';
+const storeAmis = useStoreAmis();
 const storeGlobal = useStoreGlobal();
-const amis = (window as any).amisRequire('amis/embed');
 let unsubscribe = () => {};
 onMounted(() => {
-    const _instance = amis.embed('#previewBody', storeGlobal.jsonSchema);
+    const _instance = storeAmis.amis.embed('#js-preview-body', storeGlobal.jsonSchema);
     unsubscribe = storeGlobal.$onAction(
         ({
             name, // action 的名字

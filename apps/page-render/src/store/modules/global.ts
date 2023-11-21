@@ -186,7 +186,7 @@ export const useStoreGlobal = defineStore('global', {
     state: (): globalState => state,
     getters: {},
     actions: {
-        set_json_schema(jsonSchema: Record<string, any>) {
+        set_json_schema(jsonSchema: any) {
             this.jsonSchema = jsonSchema;
         }
     }
