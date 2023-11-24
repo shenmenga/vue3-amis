@@ -8,23 +8,23 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "@/assets/style/variable.scss";`
-            }
-        }
+                additionalData: `@import "@/assets/style/variable.scss";`,
+            },
+        },
     },
     resolve: {
         alias: {
-            '@': resolve(process.cwd(), '.', 'src')
-        }
+            '@': resolve(process.cwd(), '.', 'src'),
+        },
     },
     plugins: [
         vue(),
         Components({
             resolvers: [
                 AntDesignVueResolver({
-                    importStyle: false // css in js
+                    importStyle: false, // css in js
                 })
-            ]
+            ],
         })
-    ]
+    ],
 });

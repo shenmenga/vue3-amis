@@ -13,7 +13,7 @@ onMounted(() => {
     unsubscribe = storeGlobal.$onAction(
         ({
             name, // action 的名字
-            after // 在这个 action 执行完毕之后，执行这个函数
+            after, // 在这个 action 执行完毕之后，执行这个函数
         }) => {
             // 这将在 `store` 上的操作执行之前触发
 

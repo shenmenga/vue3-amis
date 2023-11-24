@@ -9,19 +9,19 @@ const _routes = [
             {
                 path: 'index',
                 name: 'index',
-                component: () => import('@/view/index/index.vue')
+                component: () => import('@/view/index/index.vue'),
             }
-        ]
+        ],
     },
     {
         path: '/edit',
         name: 'edit',
-        component: () => import('@/view/edit/index.vue')
+        component: () => import('@/view/edit/index.vue'),
     }
 ];
 const router = createRouter({
     history: createWebHistory('/'),
-    routes: _routes
+    routes: _routes,
 });
 
 export default router;

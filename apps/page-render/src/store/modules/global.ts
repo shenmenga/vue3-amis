@@ -21,10 +21,10 @@ const createState = () => {
                                     tpl: '这里是内容1',
                                     wrapperComponent: '',
                                     inline: false,
-                                    id: 'u:5521ba924db4'
+                                    id: 'u:5521ba924db4',
                                 }
                             ],
-                            id: 'u:0dfe85378267'
+                            id: 'u:0dfe85378267',
                         },
                         {
                             type: 'collapse',
@@ -36,13 +36,13 @@ const createState = () => {
                                     tpl: '这里是内容1',
                                     wrapperComponent: '',
                                     inline: false,
-                                    id: 'u:7f89267ef75e'
+                                    id: 'u:7f89267ef75e',
                                 }
                             ],
-                            id: 'u:50b783d57813'
+                            id: 'u:50b783d57813',
                         }
                     ],
-                    id: 'u:abe189df48d0'
+                    id: 'u:abe189df48d0',
                 },
                 {
                     type: 'tabs',
@@ -55,10 +55,10 @@ const createState = () => {
                                     tpl: '内容1',
                                     wrapperComponent: '',
                                     inline: false,
-                                    id: 'u:5a94f319a01b'
+                                    id: 'u:5a94f319a01b',
                                 }
                             ],
-                            id: 'u:ff9c9fcd1e9d'
+                            id: 'u:ff9c9fcd1e9d',
                         },
                         {
                             title: '选项卡2',
@@ -67,12 +67,12 @@ const createState = () => {
                                     type: 'tpl',
                                     tpl: '内容2',
                                     wrapperComponent: '',
-                                    inline: false
+                                    inline: false,
                                 }
-                            ]
+                            ],
                         }
                     ],
-                    id: 'u:107d438b120c'
+                    id: 'u:107d438b120c',
                 },
                 {
                     type: 'nested-select',
@@ -82,7 +82,7 @@ const createState = () => {
                     options: [
                         {
                             label: '选项A',
-                            value: 'A'
+                            value: 'A',
                         },
                         {
                             label: '选项B',
@@ -90,13 +90,13 @@ const createState = () => {
                             children: [
                                 {
                                     label: '选项b1',
-                                    value: 'b1'
+                                    value: 'b1',
                                 },
                                 {
                                     label: '选项b2',
-                                    value: 'b2'
+                                    value: 'b2',
                                 }
-                            ]
+                            ],
                         },
                         {
                             label: '选项C',
@@ -104,28 +104,28 @@ const createState = () => {
                             children: [
                                 {
                                     label: '选项c1',
-                                    value: 'c1'
+                                    value: 'c1',
                                 },
                                 {
                                     label: '选项c2',
-                                    value: 'c2'
+                                    value: 'c2',
                                 }
-                            ]
+                            ],
                         }
                     ],
-                    id: 'u:00712fe4713a'
+                    id: 'u:00712fe4713a',
                 },
                 {
                     type: 'input-date',
                     label: '日期',
                     name: 'date',
-                    id: 'u:42595ebf5bbf'
+                    id: 'u:42595ebf5bbf',
                 },
                 {
                     type: 'input-date-range',
                     label: '日期范围',
                     name: 'date-range',
-                    id: 'u:54fe2ab1277f'
+                    id: 'u:54fe2ab1277f',
                 },
                 {
                     type: 'input-image',
@@ -135,7 +135,7 @@ const createState = () => {
                     proxy: true,
                     uploadType: 'fileReceptor',
                     imageClassName: 'r w-full',
-                    id: 'u:a78ba13d9e24'
+                    id: 'u:a78ba13d9e24',
                 },
                 {
                     type: 'input-range',
@@ -151,7 +151,7 @@ const createState = () => {
                     showInput: false,
                     parts: 1,
                     showSteps: false,
-                    marks: {}
+                    marks: {},
                 },
                 {
                     label: '分组',
@@ -160,21 +160,26 @@ const createState = () => {
                     options: [
                         {
                             label: '诸葛亮',
-                            value: 'zhugeliang'
+                            value: 'zhugeliang',
                         },
                         {
                             label: '曹操',
-                            value: 'caocao'
+                            value: 'caocao',
                         }
                     ],
                     selectMode: 'list',
                     resultListModeFollowSelect: false,
-                    id: 'u:985c5c164ca6'
+                    id: 'u:985c5c164ca6',
+                },
+                {
+                    type: 'chart',
+                    api: 'https://aisuda.bce.baidu.com/amis/api/mock2/chart/chart',
+                    interval: 5000,
                 }
             ],
             title: '1111',
-            toolbar: []
-        }
+            toolbar: [],
+        },
     };
     return state;
 };
@@ -188,6 +193,6 @@ export const useStoreGlobal = defineStore('global', {
     actions: {
         set_json_schema(jsonSchema: any) {
             this.jsonSchema = jsonSchema;
-        }
-    }
+        },
+    },
 });

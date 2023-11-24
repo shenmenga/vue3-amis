@@ -21,12 +21,12 @@ const tabList = ref([
     {
         label: '代码',
         value: 'code',
-        icon: h(CodeOutlined)
+        icon: h(CodeOutlined),
     },
     {
         label: '组件',
         value: 'components',
-        icon: h(AppstoreOutlined)
+        icon: h(AppstoreOutlined),
     }
 ]);
 

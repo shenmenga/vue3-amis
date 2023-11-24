@@ -4,7 +4,7 @@ const createState = () => {
     const state = {
         amis: {},
         amisLib: {},
-        amisReact: {}
+        amisReact: {},
     };
     return state;
 };
@@ -25,6 +25,6 @@ export const useStoreAmis = defineStore('amis', {
             this.amis = _amisRequire('amis/embed');
             this.amisLib = _amisRequire('amis');
             this.amisReact = _amisRequire('react');
-        }
-    }
+        },
+    },
 });

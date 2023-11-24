@@ -17,14 +17,18 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const menuList = ref([
     {
         id: 1,
-        title: '菜单名称'
+        title: '菜单名称',
     }
 ]);
 
-const on_edit = () => {};
+const on_edit = () => {
+    router.push('/edit?id=1');
+};
 const on_del = () => {};
 </script>
 <style lang="scss" scoped>

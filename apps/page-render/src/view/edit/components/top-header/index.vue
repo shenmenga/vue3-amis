@@ -2,10 +2,13 @@
     <div class="top-header g-flex-start-center">
         <p class="top-header-title">JSON配置化编辑器</p>
         <div class="top-header-right">
-            <a-button v-if="isPreview" type="primary" @click="on_edit">编辑</a-button>
-            <a-space v-else>
-                <a-button type="primary" @click="on_preview">预览</a-button>
-                <a-button @click="on_back">退出</a-button>
+            <a-space size="middle">
+                <a-button type="primary" @click="onPublish">发布</a-button>
+                <a-button v-if="isPreview" type="primary" @click="onEdit">编辑</a-button>
+                <template v-else>
+                    <a-button type="primary" @click="onPreview">预览</a-button>
+                    <a-button @click="onBack">退出</a-button>
+                </template>
             </a-space>
         </div>
     </div>
@@ -17,17 +20,18 @@ const router = useRouter();
 const emits = defineEmits(['preview', 'edit']);
 
 const isPreview = ref(false);
-const on_preview = () => {
+const onPreview = () => {
     isPreview.value = true;
     emits('preview');
 };
+const onPublish = () => {};
 
-const on_edit = () => {
+const onEdit = () => {
     isPreview.value = false;
     emits('edit');
 };
 
-const on_back = () => {
+const onBack = () => {
     router.replace('/');
 };
 </script>

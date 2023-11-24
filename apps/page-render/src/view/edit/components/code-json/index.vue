@@ -20,7 +20,7 @@ const get_schema = () => {
         size: 'xxl',
         options: {
             lineNumbers: 'off',
-            wordWrap: true
+            wordWrap: true,
         },
 
         onChange: (e: string) => {
@@ -32,21 +32,21 @@ const get_schema = () => {
         onBlur: () => {
             console.log('-- blur', amisInstance);
             amisInstance.updateSchema(get_schema());
-        }
+        },
     };
 };
 /** 宽度信息 */
 const editorWidthInfo = {
     default: 400,
     min: 300,
-    max: 800
+    max: 800,
 };
 
 const editorWidth = ref(editorWidthInfo.default);
 
 const startInfo = {
     startX: 0,
-    offsetLeft: 300
+    offsetLeft: 300,
 };
 const on_mousedown = (e: MouseEvent) => {
     startInfo.startX = e.clientX;

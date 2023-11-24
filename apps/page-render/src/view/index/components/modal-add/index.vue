@@ -10,14 +10,14 @@ import { useVModel } from '@vueuse/core';
 
 const emits = defineEmits(['update:modelValue']);
 const props = withDefaults(defineProps<{ modelValue: boolean }>(), {
-    modelValue: false
+    modelValue: false,
 });
 const router = useRouter();
 const visible = useVModel(props, 'modelValue', emits);
 
 const fApi = ref();
 const options = ref({
-    submitBtn: false
+    submitBtn: false,
 });
 const rules = ref([
     {
@@ -25,14 +25,14 @@ const rules = ref([
         field: 'page_name',
         title: '页面名称',
         value: '',
-        validate: [{ required: true, message: '请输入页面名称' }],
+        validate: [{ required: true, message: '请输入页面名称', }],
         wrap: {
-            labelCol: { span: 6 },
-            wrapperCol: { span: 12 }
-        }
+            labelCol: { span: 6, },
+            wrapperCol: { span: 12, },
+        },
     }
 ]);
-const on_sumit = async () => {
+const on_sumit = async() => {
     await fApi.value.validate();
     const _id = 1;
     router.push(`/edit?id=${_id}`);
