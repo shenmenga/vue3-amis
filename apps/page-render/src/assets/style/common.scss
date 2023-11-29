@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.g-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .g-flex-start-center {
     display: flex;
     align-items: center;
@@ -23,4 +28,7 @@
 
 .g-w-full {
     width: 100%;
+}
+.g-h-full {
+    height: 100%;
 }

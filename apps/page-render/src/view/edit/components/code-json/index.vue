@@ -1,7 +1,7 @@
 <template>
     <div class="code-editor" :style="{ width: editorWidth + 'px' }">
         <div id="js-code-editor"></div>
-        <div class="code-editor-drag" @mousedown="on_mousedown"></div>
+        <div class="code-editor-drag" @mousedown="onMousedown"></div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -12,7 +12,7 @@ const storeAmis = useStoreAmis();
 const storeGlobal = useStoreGlobal();
 let amisInstance: any = {};
 
-const get_schema = () => {
+const getSchema = () => {
     return {
         type: 'json-editor',
         language: 'json',
@@ -31,7 +31,7 @@ const get_schema = () => {
         },
         onBlur: () => {
             console.log('-- blur', amisInstance);
-            amisInstance.updateSchema(get_schema());
+            amisInstance.updateSchema(getSchema());
         },
     };
 };
@@ -48,25 +48,25 @@ const startInfo = {
     startX: 0,
     offsetLeft: 300,
 };
-const on_mousedown = (e: MouseEvent) => {
+const onMousedown = (e: MouseEvent) => {
     startInfo.startX = e.clientX;
     startInfo.offsetLeft = (e.target as HTMLDivElement).offsetLeft;
-    document.addEventListener('mousemove', on_mousemove, true);
-    document.addEventListener('mouseup', on_mouseup, true);
+    document.addEventListener('mousemove', onMousemove, true);
+    document.addEventListener('mouseup', onMouseup, true);
 };
 
-const on_mousemove = (e: MouseEvent) => {
+const onMousemove = (e: MouseEvent) => {
     const _disX = e.clientX - startInfo.startX + startInfo.offsetLeft;
     editorWidth.value = _disX > editorWidthInfo.max ? editorWidthInfo.max : _disX < editorWidthInfo.min ? editorWidthInfo.min : _disX;
 };
 
-const on_mouseup = () => {
-    document.removeEventListener('mousemove', on_mousemove, true);
-    document.removeEventListener('mouseup', on_mouseup, true);
+const onMouseup = () => {
+    document.removeEventListener('mousemove', onMousemove, true);
+    document.removeEventListener('mouseup', onMouseup, true);
 };
 
 onMounted(() => {
-    amisInstance = storeAmis.amis.embed('#js-code-editor', get_schema());
+    amisInstance = storeAmis.amis.embed('#js-code-editor', getSchema());
 });
 </script>
 <style lang="scss" scoped>
