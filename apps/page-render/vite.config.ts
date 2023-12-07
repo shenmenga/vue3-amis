@@ -27,4 +27,16 @@ export default defineConfig({
             ],
         })
     ],
+    server: {
+        host: true,
+        open: true,
+        proxy: {
+            '/dg-service/api': {
+                target: 'https://dap.qmniu.com/dg-service/api',
+                changeOrigin: true,
+                ws: true,
+                rewrite: (path) => path.replace(/^\/dg-service\/api/, ''),
+            },
+        },
+    },
 });

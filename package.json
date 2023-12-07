@@ -9,7 +9,7 @@
         "eslint-fix": "eslint \"**/*.{vue,ts,tsx}\" --fix"
     },
     "devDependencies": {
-        "@q-front-npm-configs/eslint": "1.0.4",
+        "@q-front-npm-configs/eslint": "1.0.8",
         "@q-front-npm-configs/tsconfig": "1.0.0",
         "eslint": "8.48.0",
         "eslint-config-prettier": "9.0.0",

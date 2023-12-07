@@ -183,151 +183,126 @@ const createState = () => {
 
         jsonSchema: {
             type: 'page',
-            body: {
-                type: 'service',
-                api: {
-                    methods: 'post',
-                    url: 'https://dap.qmniu.com/dg-service/api/archive/confs/page',
-                    // requestAdaptor: function(api, context) {
-                    //     return {
-                    //         // 模拟 http 请求返回
-                    //         mockResponse: {
-                    //             status: 200, // http 返回状态
-                    //             data: {
-                    //                 // http 返回结果
-                    //                 status: 0, // amis 返回数据的状态
-                    //                 data: {
-                    //                     rows: [
-                    //                         {
-                    //                             created_time: '2023-11-28 16:08:51',
-                    //                             created_user: 24,
-                    //                             updated_time: '2023-11-28 16:08:56',
-                    //                             updated_user: 24,
-                    //                             cloud_code: 'HWYUN',
-                    //                             ds_id: 2,
-                    //                             source_type: 'HIVE',
-                    //                             db_name: 'test',
-                    //                             table_name: 'hw_yyyy_mm_dd_hms_v2',
-                    //                             partitioned: true,
-                    //                             ar_mode: 'TIME_CYCLE',
-                    //                             id: 40,
-                    //                             cycle_mode: 'DAY',
-                    //                             ds_name: 'hw_hive',
-                    //                             cycle_time: 0,
-                    //                             approve_state: 'ONLINE',
-                    //                             deleted: 0,
-                    //                             std_days: '1月',
-                    //                             ia_days: '2月',
-                    //                             ar_days: '5月',
-                    //                             ar_level: 'CLOUD_AR',
-                    //                             cloud_code_view: '华为云',
-                    //                             ds_type_view: 'hw_hive(HIVE)',
-                    //                             ar_level_view: '归档',
-                    //                             cycle_mode_view: '日调度',
-                    //                             approve_state_view: '上线',
-                    //                         },
-                    //                         {
-                    //                             created_time: '2023-11-28 16:06:58',
-                    //                             created_user: 24,
-                    //                             updated_time: '2023-11-28 16:07:00',
-                    //                             updated_user: 24,
-                    //                             cloud_code: 'HWYUN',
-                    //                             ds_id: 2,
-                    //                             source_type: 'HIVE',
-                    //                             db_name: 'test',
-                    //                             table_name: 'hw_yyyy_mm_dd_hms_v2',
-                    //                             partitioned: true,
-                    //                             ar_mode: 'TIME_CYCLE',
-                    //                             ar_rule: {
-                    //                                 part_col: 'dt',
-                    //                                 part_format: 'yyyy-MM-dd HH:mm:ss',
-                    //                                 std_days: 300,
-                    //                                 ia_days: 330,
-                    //                                 ar_days: 510,
-                    //                                 time_unit: 'D',
-                    //                                 ar_level: 'CLOUD_COLD_AR',
-                    //                             },
-                    //                             id: 39,
-                    //                             cycle_mode: 'MANUAL',
-                    //                             ds_name: 'hw_hive',
-                    //                             cycle_time: 0,
-                    //                             approve_state: 'ONLINE',
-                    //                             deleted: 0,
-                    //                             std_days: '300天',
-                    //                             ia_days: '330天',
-                    //                             ar_days: '510天',
-                    //                             ar_level: 'CLOUD_COLD_AR',
-                    //                             cloud_code_view: '华为云',
-                    //                             ds_type_view: 'hw_hive(HIVE)',
-                    //                             ar_level_view: '冷归档',
-                    //                             cycle_mode_view: '单次执行',
-                    //                             approve_state_view: '上线',
-                    //                         }
-                    //                     ],
-                    //                     columns: [
-                    //                         { name: 'id', label: '归档ID', },
-                    //                         { name: 'cloud_code_view', label: '云平台', },
-                    //                         { name: 'ds_type_view', label: '数据源', },
-                    //                         { name: 'db_name', label: '数据库名称', },
-                    //                         { name: 'table_name', label: '表名称', },
-                    //                         { name: 'ar_mode', label: '归档方式', },
-                    //                         { name: 'cycle_mode_view', label: '调度方式', },
-                    //                         { name: 'std_days', label: '标准存储', },
-                    //                         { name: 'approve_state_view', label: '状态', },
-                    //                         {
-                    //                             type: 'operation',
-                    //                             label: '操作',
-                    //                             width: 100,
-                    //                             buttons: [
-                    //                                 {
-                    //                                     label: '编辑',
-                    //                                     type: 'button',
-                    //                                     level: 'link',
-                    //                                     actionType: 'dialog',
-                    //                                     dialog: {
-                    //                                         title: '查看详情',
-                    //                                         body: {
-                    //                                             type: 'form',
-                    //                                             body: [
-                    //                                                 {
-                    //                                                     type: 'input-text',
-                    //                                                     name: 'id',
-                    //                                                     label: '归档ID',
-                    //                                                 },
-                    //                                                 {
-                    //                                                     type: 'input-text',
-                    //                                                     name: 'cloud_code_view',
-                    //                                                     label: '云平台',
-                    //                                                 }
-                    //                                             ],
-                    //                                         },
-                    //                                     },
-                    //                                 },
-                    //                                 {
-                    //                                     label: '删除',
-                    //                                     type: 'button',
-                    //                                     level: 'link',
-                    //                                     className: 'text-danger',
-                    //                                     disabledOn: "this.grade === 'A'",
-                    //                                 }
-                    //                             ],
-                    //                         }
-                    //                     ],
-                    //                 },
-                    //             },
-                    //         },
-                    //     };
-                    // },
+            title: '页面标题',
+            body: [
+                {
+                    'label': '新增',
+                    'type': 'button',
+                    'actionType': 'dialog',
+                    'level': 'primary',
+                    'className': 'm-b-sm',
+                    'dialog': {
+                        'title': '新增团队',
+                        'body': {
+                            'type': 'form',
+                            'api': {
+                                'method': 'post',
+                                url: 'http://config-center.qmniu.com/api/backend/server/team/add?qm_csrf_backend=V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV&env=test',
+                                dataType: 'form-data',
+                            },
+                            'body': [
+                                {
+                                    'type': 'input-text',
+                                    'name': 'name',
+                                    'label': '名称',
+                                },
+                                {
+                                    'type': 'textarea',
+                                    'name': 'remark',
+                                    'label': '描述',
+                                }
+                            ],
+                        },
+                    },
                 },
-                body: [
-                    {
-                        type: 'table2',
-                        title: '表格标题 - ${rows.length}',
-                        source: '$rows',
-                        columns: '$columns',
-                    }
-                ],
-            },
+                {
+                    type: 'crud',
+                    api: {
+                        method: 'get',
+                        url: 'http://config-center.qmniu.com/api/backend/server/team/list',
+                        data: { page: 1, page_size: 10, qm_csrf_backend: 'V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV', },
+                        responseData: {
+                            'items': '$table_list',
+                        },
+                    },
+                    syncLocation: false,
+                    columns: [
+                        { label: '名称', name: 'name', },
+                        { label: '创建者', name: 'creator', },
+                        { label: '项目', name: 'project_num', },
+                        { label: '更新时间', name: 'updated_time', },
+                        { label: '描述', name: 'remark', },
+                        { label: '操作', name: 'action', type: 'button-toolbar', buttons: [
+                            { type: 'button', label: '修改', level: 'link', actionType: 'dialog',
+                                'dialog': {
+                                    'title': '编辑团队',
+                                    'body': {
+                                        'type': 'form',
+                                        'api': {
+                                            'method': 'post',
+                                            url: 'http://config-center.qmniu.com/api/backend/server/team/update?qm_csrf_backend=V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV&env=test',
+                                            dataType: 'form-data',
+                                        },
+                                        'body': [
+                                            {
+                                                'type': 'hidden',
+                                                'name': 'id',
+                                            },
+                                            {
+                                                'type': 'input-text',
+                                                'name': 'name',
+                                                'label': '名称',
+                                            },
+                                            {
+                                                'type': 'textarea',
+                                                'name': 'remark',
+                                                'label': '描述',
+                                            }
+                                        ],
+                                    },
+                                },
+                            },
+                            { type: 'button', label: '团队管理员', level: 'link', actionType: 'dialog',
+                                'dialog': {
+                                    'title': '编辑团队',
+                                    'body': {
+                                        'type': 'transfer',
+                                        'name': 'transfer',
+                                        'value': 'zhugeliang,libai',
+                                        'options': [
+                                            {
+                                                'label': '诸葛亮',
+                                                'value': 'zhugeliang',
+                                            },
+                                            {
+                                                'label': '曹操',
+                                                'value': 'caocao',
+                                            },
+                                            {
+                                                'label': '钟无艳',
+                                                'value': 'zhongwuyan',
+                                            },
+                                            {
+                                                'label': '李白',
+                                                'value': 'libai',
+                                            },
+                                            {
+                                                'label': '韩信',
+                                                'value': 'hanxin',
+                                            },
+                                            {
+                                                'label': '云中君',
+                                                'value': 'yunzhongjun',
+                                            }
+                                        ],
+                                    },
+                                },
+                            }
+                        ],
+                        }
+                    ],
+                }
+            ],
         },
     };
     return state;

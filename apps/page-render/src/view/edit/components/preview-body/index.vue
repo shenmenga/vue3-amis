@@ -5,6 +5,8 @@
 import { onMounted, onUnmounted } from 'vue';
 import { useStoreGlobal } from '@/store/modules/global';
 import { useStoreAmis } from '@/store/modules/amis';
+
+console.log('----- ');
 const storeAmis = useStoreAmis();
 const storeGlobal = useStoreGlobal();
 let unsubscribe = () => {};
@@ -15,7 +17,13 @@ onMounted(() => {
         {},
         {
             requestAdaptor(api) {
+                api.headers['X-Qm-Devops-Token'] = 'GRdNSgMTb1oCQAkDBhkTR0NQSl0AVVNDChOAheyF7q1AGRpcCwBZX0RYEUNfUF9fVVtfcxBRWwBfHwVYCUBOFAdNSFAUBG9SEkAJAQAFAwIIBgwKVEU=';
                 console.log(111, api);
+                // api.data = api.data || {};
+                // api.data = {
+                //     ...api.data,
+                //     env: 'test',
+                // };
                 // api.headers.token = '123';
                 // 支持异步，可以通过 api.mockResponse 来设置返回结果，跳过真正的请求发送
                 // 此功能自定义 fetcher 的话会失效
@@ -26,6 +34,21 @@ onMounted(() => {
             // 另外在 amis 配置项中的 api 也可以配置适配器，针对某个特定接口单独处理。
             responseAdaptor(api, payload, query, request, response) {
                 console.log(222, api, payload, query, request, response);
+                payload.status = payload.code === 200 ? 0 : payload.code;
+                // if (payload.code === 200){
+                //     const _header = payload.data.table_header;
+                //     const _columns:Record<string, any>[] = [];
+                //     Object.keys(_header).forEach(key => {
+                //         _columns.push({ title: key, name: _header[key], });
+                //     });
+                //     payload.data.columns = [..._columns, {
+                //         'title': '操作',
+                //         'name': 'action',
+                //         'type': 'button',
+                //         'label': '删除',
+                //     }];
+                // }
+
                 return payload;
             },
         }
