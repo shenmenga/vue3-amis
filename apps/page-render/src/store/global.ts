@@ -1,7 +1,20 @@
 import { defineStore } from 'pinia';
-
+import { ItemType } from 'ant-design-vue';
+import { useRouter } from 'vue-router';
+interface IGlobalState{
+    projectMenu: ItemType[];
+    currentProjectId: string,
+    currentSubMenuId: string,
+    subMenusMap: Map<string, IMenuData[]>;
+    jsonSchemaPage: any;
+    jsonSchema: any
+}
 const createState = () => {
-    const state = {
+    return {
+        projectMenu: [],
+        currentProjectId: '',
+        currentSubMenuId: '',
+        subMenusMap: new Map(),
         jsonSchemaPage: {
             type: 'page',
             id: 'u:01b800b60069',
@@ -214,109 +227,142 @@ const createState = () => {
                             ],
                         },
                     },
-                },
-                {
-                    type: 'crud',
-                    api: {
-                        method: 'get',
-                        url: 'http://config-center.qmniu.com/api/backend/server/team/list',
-                        data: { page: 1, page_size: 10, qm_csrf_backend: 'V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV', },
-                        responseData: {
-                            'items': '$table_list',
-                        },
-                    },
-                    syncLocation: false,
-                    columns: [
-                        { label: '名称', name: 'name', },
-                        { label: '创建者', name: 'creator', },
-                        { label: '项目', name: 'project_num', },
-                        { label: '更新时间', name: 'updated_time', },
-                        { label: '描述', name: 'remark', },
-                        { label: '操作', name: 'action', type: 'button-toolbar', buttons: [
-                            { type: 'button', label: '修改', level: 'link', actionType: 'dialog',
-                                'dialog': {
-                                    'title': '编辑团队',
-                                    'body': {
-                                        'type': 'form',
-                                        'api': {
-                                            'method': 'post',
-                                            url: 'http://config-center.qmniu.com/api/backend/server/team/update?qm_csrf_backend=V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV&env=test',
-                                            dataType: 'form-data',
-                                        },
-                                        'body': [
-                                            {
-                                                'type': 'hidden',
-                                                'name': 'id',
-                                            },
-                                            {
-                                                'type': 'input-text',
-                                                'name': 'name',
-                                                'label': '名称',
-                                            },
-                                            {
-                                                'type': 'textarea',
-                                                'name': 'remark',
-                                                'label': '描述',
-                                            }
-                                        ],
-                                    },
-                                },
-                            },
-                            { type: 'button', label: '团队管理员', level: 'link', actionType: 'dialog',
-                                'dialog': {
-                                    'title': '编辑团队',
-                                    'body': {
-                                        'type': 'transfer',
-                                        'name': 'transfer',
-                                        'value': 'zhugeliang,libai',
-                                        'options': [
-                                            {
-                                                'label': '诸葛亮',
-                                                'value': 'zhugeliang',
-                                            },
-                                            {
-                                                'label': '曹操',
-                                                'value': 'caocao',
-                                            },
-                                            {
-                                                'label': '钟无艳',
-                                                'value': 'zhongwuyan',
-                                            },
-                                            {
-                                                'label': '李白',
-                                                'value': 'libai',
-                                            },
-                                            {
-                                                'label': '韩信',
-                                                'value': 'hanxin',
-                                            },
-                                            {
-                                                'label': '云中君',
-                                                'value': 'yunzhongjun',
-                                            }
-                                        ],
-                                    },
-                                },
-                            }
-                        ],
-                        }
-                    ],
                 }
+                // {
+                //     type: 'crud',
+                //     api: {
+                //         method: 'get',
+                //         url: 'http://config-center.qmniu.com/api/backend/server/team/list',
+                //         data: { page: 1, page_size: 10, qm_csrf_backend: 'V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV', },
+                //         responseData: {
+                //             'items': '$table_list',
+                //         },
+                //     },
+                //     syncLocation: false,
+                //     columns: [
+                //         { label: '名称', name: 'name', },
+                //         { label: '创建者', name: 'creator', },
+                //         { label: '项目', name: 'project_num', },
+                //         { label: '更新时间', name: 'updated_time', },
+                //         { label: '描述', name: 'remark', },
+                //         { label: '操作', name: 'action', type: 'button-toolbar', buttons: [
+                //             { type: 'button', label: '修改', level: 'link', actionType: 'dialog',
+                //                 'dialog': {
+                //                     'title': '编辑团队',
+                //                     'body': {
+                //                         'type': 'form',
+                //                         'api': {
+                //                             'method': 'post',
+                //                             url: 'http://config-center.qmniu.com/api/backend/server/team/update?qm_csrf_backend=V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV&env=test',
+                //                             dataType: 'form-data',
+                //                         },
+                //                         'body': [
+                //                             {
+                //                                 'type': 'hidden',
+                //                                 'name': 'id',
+                //                             },
+                //                             {
+                //                                 'type': 'input-text',
+                //                                 'name': 'name',
+                //                                 'label': '名称',
+                //                             },
+                //                             {
+                //                                 'type': 'textarea',
+                //                                 'name': 'remark',
+                //                                 'label': '描述',
+                //                             }
+                //                         ],
+                //                     },
+                //                 },
+                //             },
+                //             { type: 'button', label: '团队管理员', level: 'link', actionType: 'dialog',
+                //                 'dialog': {
+                //                     'title': '编辑团队',
+                //                     'body': {
+                //                         'type': 'transfer',
+                //                         'name': 'transfer',
+                //                         'value': 'zhugeliang,libai',
+                //                         'options': [
+                //                             {
+                //                                 'label': '诸葛亮',
+                //                                 'value': 'zhugeliang',
+                //                             },
+                //                             {
+                //                                 'label': '曹操',
+                //                                 'value': 'caocao',
+                //                             },
+                //                             {
+                //                                 'label': '钟无艳',
+                //                                 'value': 'zhongwuyan',
+                //                             },
+                //                             {
+                //                                 'label': '李白',
+                //                                 'value': 'libai',
+                //                             },
+                //                             {
+                //                                 'label': '韩信',
+                //                                 'value': 'hanxin',
+                //                             },
+                //                             {
+                //                                 'label': '云中君',
+                //                                 'value': 'yunzhongjun',
+                //                             }
+                //                         ],
+                //                     },
+                //                 },
+                //             }
+                //         ],
+                //         }
+                //     ],
+                // }
             ],
         },
     };
-    return state;
 };
 export type globalState = ReturnType<typeof createState>;
 
 export const state = createState();
 
 export const useStoreGlobal = defineStore('global', {
-    state: (): globalState => state,
-    getters: {},
+    state: (): IGlobalState => state,
+    getters: {
+        /** 当前项目的子菜单列表 */
+        currentSubMenuList(): IMenuData[]{
+            return this.subMenusMap.get(this.currentProjectId)!;
+        },
+    },
     actions: {
-        set_json_schema(jsonSchema: any) {
+        updatePageSchema(jsonSchema: any) {
             this.jsonSchema = jsonSchema;
+        },
+        /** 获取菜单数据, 提取一级菜单，以及对应的二级菜单 */
+        async getMenuData(list: IMenuData[]){
+            const _firstLevelMenu: ItemType[] = [];
+            const _subMenusMap = new Map();
+            list.forEach(item => {
+                _firstLevelMenu.push({
+                    key: item.id,
+                    label: item.name,
+                    title: item.id,
+                });
+                _subMenusMap.set(item.id, item.children);
+            });
+            this.projectMenu = _firstLevelMenu;
+            this.currentProjectId = _firstLevelMenu[0]!.key as string;
+            this.subMenusMap = _subMenusMap;
+
+            // 根据链接判断获取当前二级菜单的id
+            const router = useRouter();
+            await router.isReady();
+            const { params, } = router.currentRoute.value;
+            if (params.id){
+                const _item = _subMenusMap.get(this.currentProjectId).find((v: IMenuData) => v.id === params.id);
+                this.setCurrentSubMenuId(_item ? _item.id : '');
+            }
+            return true;
+        },
+        setCurrentSubMenuId(data: string){
+            this.currentSubMenuId = data;
         },
     },
 });

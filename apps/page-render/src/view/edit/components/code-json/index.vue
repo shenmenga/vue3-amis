@@ -6,8 +6,8 @@
 </template>
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import { useStoreGlobal } from '@/store/modules/global';
-import { useStoreAmis } from '@/store/modules/amis';
+import { useStoreGlobal } from '@/store/global';
+import { useStoreAmis } from '@/store/amis';
 const storeAmis = useStoreAmis();
 const storeGlobal = useStoreGlobal();
 let amisInstance: any = {};
@@ -26,7 +26,7 @@ const getSchema = () => {
         onChange: (e: string) => {
             try {
                 const _json = JSON.parse(e);
-                storeGlobal.set_json_schema(_json);
+                storeGlobal.updatePageSchema(_json);
             } catch (er) {}
         },
         onBlur: () => {
@@ -86,3 +86,4 @@ onMounted(() => {
     }
 }
 </style>
+@/store/global@/store/amis

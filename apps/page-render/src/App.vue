@@ -5,9 +5,13 @@
 </template>
 <script setup lang="ts">
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import { useStoreAmis } from '@/store/modules/amis';
+import { useStoreAmis } from '@/store/amis';
+import { useStoreGlobal } from '@/store/global';
+import { menuAI } from '@/menu/ai';
+const storeGlobal = useStoreGlobal();
 const storeAmis = useStoreAmis();
-storeAmis.get_amis_sdk();
+storeAmis.getAmisSdk();
+storeGlobal.getMenuData(menuAI);
 </script>
 <style lang="scss">
 @import '@/assets/style/_reset.css';
@@ -21,3 +25,4 @@ storeAmis.get_amis_sdk();
     }
 }
 </style>
+@/store/amis@/store/global

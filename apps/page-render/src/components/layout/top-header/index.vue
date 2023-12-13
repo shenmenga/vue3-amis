@@ -6,7 +6,7 @@
             <p class="top-header-title-text">七猫速搭</p>
         </a>
         <div class="top-header-tabs">
-            <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" :items="props.list" theme="dark" />
+            <a-menu v-model:selectedKeys="selectedKeys" mode="horizontal" :items="storeGlobal.projectMenu" theme="dark" />
         </div>
         <div class="top-header-right">
             <slot></slot>
@@ -16,28 +16,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { MenuProps } from 'ant-design-vue';
-const props = withDefaults(
-    defineProps<{
-        list: MenuProps['items'];
-    }>(),
-    {
-        list: () => [
-            {
-                key: 'mail',
-                label: '大数据',
-                title: '1',
-            },
-            {
-                key: 'app',
-                label: '基础平台',
-                title: '2',
-            }
-        ],
-    }
-);
-const selectedKeys = ref(['mail']);
+import { useStoreGlobal } from '@/store/global';
+const storeGlobal = useStoreGlobal();
+
+const selectedKeys = ref([storeGlobal.projectMenu[0]!.key]);
 const jumpPage = (path: string) => {};
 onMounted(() => {});
 </script>
@@ -89,3 +71,4 @@ onMounted(() => {});
     }
 }
 </style>
+@/store/global

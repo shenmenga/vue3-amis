@@ -1,12 +1,16 @@
 <template>
-    <div class="index">---- index</div>
+    <div class="index">
+        <preview-body :schema="pageSchema"></preview-body>
+    </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-
-const visibleAdd = ref(false);
-const to_add_page = () => {
-    visibleAdd.value = true;
-};
+import { computed } from 'vue';
+import previewBody from '@/components/preview-body/index.vue';
+import { useStoreGlobal } from '@/store/global';
+const storeGlobal = useStoreGlobal();
+const pageSchema = computed(() => {
+    return storeGlobal.jsonSchema;
+});
 </script>
 <style lang="scss" scoped></style>
+@/store/global

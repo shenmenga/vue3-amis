@@ -1,7 +1,7 @@
 <template>
     <div class="page-wrapper g-flex-column">
         <top-header>
-            <a-button type="link" @click="onAddProject">新增项目</a-button>
+            <!-- <a-button type="link" @click="onAddProject">新增项目</a-button> -->
         </top-header>
         <div class="g-flex g-flex-1">
             <aside-menu></aside-menu>

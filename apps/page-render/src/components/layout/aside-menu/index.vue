@@ -1,42 +1,55 @@
 <template>
     <div class="aisde-menu g-flex-column">
-        <a-menu theme="light" class="g-flex-1">
-            <a-menu-item class="menu-item" v-for="item in menuList" :key="item.id">
+        <a-menu theme="light" class="g-flex-1" v-model:selectedKeys="selectedKeys" >
+            <a-menu-item class="menu-item" v-for="item in storeGlobal.currentSubMenuList" :key="item.id" @click="onChangeMenu(item)">
                 <div class="g-flex">
-                    <p class="g-flex-1">菜单名称</p>
-                    <i class="menu-item-icon g-flex-center-center" @click="onEdit">
+                    <p class="g-flex-1">{{ item.name }}</p>
+                    <i class="menu-item-icon g-flex-center-center" @click="onEdit(item.id)" v-if="hasRight">
                         <EditOutlined />
                     </i>
-                    <!-- <a-popconfirm title="确定删除该页面吗？" @confirm="on_del">
-                    <i class="menu-item-icon g-flex-center-center">
-                        <DeleteOutlined />
-                    </i>
-                </a-popconfirm> -->
                 </div>
             </a-menu-item>
         </a-menu>
-        <div class="add-btn">
+        <!-- <div class="add-btn">
             <a-button type="primary" @click="toAdd">新增页面</a-button>
-        </div>
+        </div> -->
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStoreGlobal } from '@/store/global';
+const storeGlobal = useStoreGlobal();
 const router = useRouter();
-const menuList = ref([
-    {
-        id: 1,
-        title: '菜单名称',
-    }
-]);
+const hasRight = false;
+const selectedKeys = ref<string[]>([]);
 
-const onEdit = () => {
-    router.push('/edit?id=1');
+const unsubscribe = storeGlobal.$onAction(
+    ({
+        name,
+        after,
+    }) => {
+        after(() => {
+            if (name === 'setCurrentSubMenuId') {
+                selectedKeys.value = [storeGlobal.currentSubMenuId];
+                unsubscribe();
+            }
+        });
+    }
+);
+
+const onEdit = (id: string) => {
+    console.log(111, storeGlobal.currentSubMenuList);
+    router.push(`/edit?id=${id}`);
 };
 const toAdd = () => {
     router.push('/edit');
 };
+const onChangeMenu = (item: IMenuData) => {
+    storeGlobal.updatePageSchema(item.schema);
+    router.replace(`/index/${item.id}`);
+};
+
 </script>
 <style lang="scss" scoped>
 .aisde-menu {
@@ -64,6 +77,7 @@ const toAdd = () => {
         margin: 0;
         border-radius: 0;
         width: 100%;
+        padding-right: 0;
         &:not(.ant-menu-item-selected):hover:hover {
             background-color: #e6f4ff;
             color: #1677ff;
@@ -75,3 +89,4 @@ const toAdd = () => {
     }
 }
 </style>
+@/store/global

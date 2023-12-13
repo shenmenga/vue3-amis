@@ -20,7 +20,7 @@ export const useStoreAmis = defineStore('amis', {
     state: (): IAmisState => state,
     getters: {},
     actions: {
-        get_amis_sdk() {
+        getAmisSdk() {
             const _amisRequire = (window as any).amisRequire;
             this.amis = _amisRequire('amis/embed');
             this.amisLib = _amisRequire('amis');

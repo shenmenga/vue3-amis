@@ -24,6 +24,7 @@ declare module 'vue' {
     ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     Layout: typeof import('./src/components/layout/index.vue')['default']
     ModalAddProject: typeof import('./src/components/layout/modal-add-project/index.vue')['default']
+    PreviewBody: typeof import('./src/components/preview-body/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopHeader: typeof import('./src/components/layout/top-header/index.vue')['default']

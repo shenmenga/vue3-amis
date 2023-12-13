@@ -4,10 +4,10 @@ const _routes = [
     {
         path: '/',
         component: layout,
-        redirect: '/index',
+        redirect: '/index/chapter',
         children: [
             {
-                path: 'index',
+                path: 'index/:id',
                 name: 'index',
                 component: () => import('@/view/index/index.vue'),
             }
