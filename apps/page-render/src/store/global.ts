@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
 import { ItemType } from 'ant-design-vue';
 import { useRouter } from 'vue-router';
-interface IGlobalState{
+interface IGlobalState {
     projectMenu: ItemType[];
-    currentProjectId: string,
-    currentSubMenuId: string,
+    currentProjectId: string;
+    currentSubMenuId: string;
     subMenusMap: Map<string, IMenuData[]>;
     jsonSchemaPage: any;
-    jsonSchema: any
+    jsonSchema: any;
 }
 const createState = () => {
     return {
@@ -199,30 +199,30 @@ const createState = () => {
             title: '页面标题',
             body: [
                 {
-                    'label': '新增',
-                    'type': 'button',
-                    'actionType': 'dialog',
-                    'level': 'primary',
-                    'className': 'm-b-sm',
-                    'dialog': {
-                        'title': '新增团队',
-                        'body': {
-                            'type': 'form',
-                            'api': {
-                                'method': 'post',
+                    label: '新增',
+                    type: 'button',
+                    actionType: 'dialog',
+                    level: 'primary',
+                    className: 'm-b-sm',
+                    dialog: {
+                        title: '新增团队',
+                        body: {
+                            type: 'form',
+                            api: {
+                                method: 'post',
                                 url: 'http://config-center.qmniu.com/api/backend/server/team/add?qm_csrf_backend=V1d4NK0aWq51U1jkGdgNiYC5fcJqymmV&env=test',
                                 dataType: 'form-data',
                             },
-                            'body': [
+                            body: [
                                 {
-                                    'type': 'input-text',
-                                    'name': 'name',
-                                    'label': '名称',
+                                    type: 'input-text',
+                                    name: 'name',
+                                    label: '名称',
                                 },
                                 {
-                                    'type': 'textarea',
-                                    'name': 'remark',
-                                    'label': '描述',
+                                    type: 'textarea',
+                                    name: 'remark',
+                                    label: '描述',
                                 }
                             ],
                         },
@@ -327,7 +327,7 @@ export const useStoreGlobal = defineStore('global', {
     state: (): IGlobalState => state,
     getters: {
         /** 当前项目的子菜单列表 */
-        currentSubMenuList(): IMenuData[]{
+        currentSubMenuList(): IMenuData[] {
             return this.subMenusMap.get(this.currentProjectId)!;
         },
     },
@@ -336,10 +336,10 @@ export const useStoreGlobal = defineStore('global', {
             this.jsonSchema = jsonSchema;
         },
         /** 获取菜单数据, 提取一级菜单，以及对应的二级菜单 */
-        async getMenuData(list: IMenuData[]){
+        async getMenuData(list: IMenuData[]) {
             const _firstLevelMenu: ItemType[] = [];
             const _subMenusMap = new Map();
-            list.forEach(item => {
+            list.forEach((item) => {
                 _firstLevelMenu.push({
                     key: item.id,
                     label: item.name,
@@ -355,13 +355,16 @@ export const useStoreGlobal = defineStore('global', {
             const router = useRouter();
             await router.isReady();
             const { params, } = router.currentRoute.value;
-            if (params.id){
+            if (params.id) {
                 const _item = _subMenusMap.get(this.currentProjectId).find((v: IMenuData) => v.id === params.id);
-                this.setCurrentSubMenuId(_item ? _item.id : '');
+                if (_item) {
+                    this.setCurrentSubMenuId(_item.id);
+                    this.updatePageSchema(_item.schema);
+                }
             }
             return true;
         },
-        setCurrentSubMenuId(data: string){
+        setCurrentSubMenuId(data: string) {
             this.currentSubMenuId = data;
         },
     },

@@ -44,6 +44,7 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 .preview-body {
+    position: relative;
     overflow-y: auto;
     height: calc(100vh - $header-height - $space * 2);
 }

@@ -20,7 +20,7 @@ declare global {
         count?: number;
     }
 
-    interface IMenuData{
+    interface IMenuData {
         name: string;
         id: string;
         schema?: any;
