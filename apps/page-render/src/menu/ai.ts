@@ -8,6 +8,7 @@ export const pageJsonSchema1 = {
         title: false,
         wrapWithPanel: false,
         labelWidth: 160,
+        initApi: '/api/pic/storyboard-items-cfg',
         body: [
             {
                 type: 'input-number',
@@ -27,26 +28,17 @@ export const pageJsonSchema1 = {
                         name: 'select1',
                         label: false,
                         required: true,
-                        options: [
-                            {
-                                label: 'A',
-                                value: 'a',
-                            },
-                            {
-                                label: 'B',
-                                value: 'b',
-                            },
-                            {
-                                label: 'C',
-                                value: 'c',
-                            }
-                        ],
+                        joinValues: false,
+                        selectFirst: true,
+                        source: '${model_source.options}',
                     },
                     {
                         type: 'select',
                         name: 'select2',
                         label: false,
                         required: true,
+                        value: '${select1.isDefault}',
+                        joinValues: false,
                         options: [
                             {
                                 label: 'A',
@@ -59,6 +51,7 @@ export const pageJsonSchema1 = {
                             {
                                 label: 'C',
                                 value: 'c',
+                                a: 123,
                             }
                         ],
                     }
