@@ -1,9 +1,8 @@
 <template>
-    <div class="preview-body g-flex-1" id="js-preview-body"></div>
+    <amis-render :schema="props.schema" :amis-options="amisOptions" :global-data="globalData"></amis-render>
 </template>
 <script lang="ts" setup>
-import { onMounted, watch } from 'vue';
-import { useStoreAmis } from '@/store/amis';
+import amisRender from '@amis/render';
 const props = withDefaults(
     defineProps<{
         schema: Record<string, any>;
@@ -12,46 +11,25 @@ const props = withDefaults(
         schema: () => ({}),
     }
 );
-const storeAmis = useStoreAmis();
-let amisInstance: any;
-const baseUrl = 'https://aigc.qmniu.com';
-const renderSchema = (schema: Record<string, any>) => {
-    amisInstance = storeAmis.amis.embed(
-        '#js-preview-body',
-        schema,
-        {},
-        {
-            requestAdaptor(api) {
-                api.url = baseUrl + api.url;
-                return api;
-            },
-            // 全局 api 适配器。
-            // 另外在 amis 配置项中的 api 也可以配置适配器，针对某个特定接口单独处理。
-            responseAdaptor(api, payload, query, request, response) {
-                payload.status = payload.code === 200 ? 0 : payload.code;
-                return payload;
-            },
+const baseUrl = 'https://aisuda.bce.baidu.com';
+
+const amisOptions = {
+    requestAdaptor(api: any) {
+        // 本地开发使用proxy，不加域名
+        if (import.meta.env.PROD && !api.url.startWith('http')) {
+            api.url = baseUrl + api.url;
         }
-    );
+        return api;
+    },
+    // 全局 api 适配器。
+    // 另外在 amis 配置项中的 api 也可以配置适配器，针对某个特定接口单独处理。
+    responseAdaptor(api: any, payload: any, query: any, request: any, response: any) {
+        return payload;
+    },
 };
 
-watch(
-    () => props.schema,
-    (val) => {
-        amisInstance.updateSchema(val);
-    },
-    { deep: true, }
-);
-
-onMounted(() => {
-    renderSchema(props.schema);
-});
+// 全局数据，可在 schema 中直接使用
+const globalData = {
+    name: 'amis',
+};
 </script>
-<style lang="scss" scoped>
-.preview-body {
-    position: relative;
-    overflow-y: auto;
-    height: calc(100vh - $header-height - $space * 2);
-}
-</style>
-@/store/amis

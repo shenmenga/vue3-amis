@@ -7,11 +7,11 @@
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import { useStoreAmis } from '@/store/amis';
 import { useStoreGlobal } from '@/store/global';
-import { menuAI } from '@/menu/ai';
+import { menuAmis } from '@/menu/amis';
 const storeGlobal = useStoreGlobal();
 const storeAmis = useStoreAmis();
 storeAmis.getAmisSdk();
-storeGlobal.getMenuData(menuAI);
+storeGlobal.getMenuData(menuAmis);
 </script>
 <style lang="scss">
 @import '@/assets/style/_reset.css';
@@ -25,4 +25,4 @@ storeGlobal.getMenuData(menuAI);
     }
 }
 </style>
-@/store/amis@/store/global
+@/store/amis@/store/global @/menu/amis

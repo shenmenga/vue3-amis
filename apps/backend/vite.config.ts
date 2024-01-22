@@ -31,11 +31,10 @@ export default defineConfig({
         host: true,
         open: true,
         proxy: {
-            '/dg-service/api': {
-                target: 'https://dap.qmniu.com/dg-service/api',
+            '/amis/api': {
+                target: 'https://aisuda.bce.baidu.com',
                 changeOrigin: true,
                 ws: true,
-                rewrite: (path) => path.replace(/^\/dg-service\/api/, ''),
             },
         },
     },

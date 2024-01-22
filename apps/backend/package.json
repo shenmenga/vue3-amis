@@ -1,12 +1,13 @@
 {
-    "name": "page-render",
-    "version": "0.0.1",
+    "name": "@amis/backend",
+    "version": "1.0.0",
     "scripts": {
         "dev": "vite --host",
         "build": "vue-tsc && vite build",
         "preview": "vite preview"
     },
     "dependencies": {
+        "@amis/render": "workspace:*",
         "@ant-design/icons-vue": "7.0.1",
         "@form-create/ant-design-vue": "3.1.26",
         "ant-design-vue": "4.x",
