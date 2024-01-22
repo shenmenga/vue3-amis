@@ -18,16 +18,19 @@ module.exports = {
         // Vue 模板文件中双花括号 {{}} 添加空格
         'vue/mustache-interpolation-spacing': ['error', 'always'],
         // 类型冒号后加空格
-        '@typescript-eslint/type-annotation-spacing': ['error', {
-            before: false,
-            after: true,
-            overrides: {
-                arrow: {
-                    before: true,
-                    after: true,
+        '@typescript-eslint/type-annotation-spacing': [
+            'error',
+            {
+                before: false,
+                after: true,
+                overrides: {
+                    arrow: {
+                        before: true,
+                        after: true,
+                    },
                 },
-            },
-        }],
+            }
+        ],
         'max-len': [2, 500],
         // 非空断言
         '@typescript-eslint/no-non-null-assertion': 'off',
